@@ -7,15 +7,15 @@ def format_linter_error(error: dict) -> dict:
     }
 
 
-def format_single_linter_file(file_path: str, errors: list[dict]) -> dict:
+def format_single_linter_file(file_path: str, errors: list) -> dict:
     return {
-        file_path: [format_linter_error(error) for error in errors]
+        file_path: [format_linter_error(e) for e in errors]
     }
 
 
-def format_linter_report(linter_report: dict) -> list[dict]:
+def format_linter_report(linter_report: dict) -> list:
     return [
-        format_linter_error(error)
-        for file_errors in linter_report.values()
-        for error in file_errors
+        format_linter_error(e)
+        for errors in linter_report.values()
+        for e in errors
     ]
