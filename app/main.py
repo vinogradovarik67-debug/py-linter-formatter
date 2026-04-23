@@ -9,15 +9,13 @@ def format_linter_error(error: dict) -> dict:
 
 def format_single_linter_file(file_path: str, errors: list) -> dict:
     return {
-        file_path: [format_linter_error(e) for e in errors]
+        file_path: [format_linter_error(single_error) for single_error in errors]
     }
 
 
 def format_linter_report(linter_report: dict) -> list:
     all_errors = []
-    # Важливо: ми проходимо по всіх файлах у звіті
-    for path, errors in linter_report.items():
-        # Для кожного файлу форматуємо його список помилок
-        for e in errors:
-            all_errors.append(format_linter_error(e))
+    for file_errors in linter_report.values():
+        for error in file_errors:
+            all_errors.append(format_linter_error(error))
     return all_errors
