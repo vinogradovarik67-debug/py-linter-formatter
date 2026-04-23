@@ -14,8 +14,10 @@ def format_single_linter_file(file_path: str, errors: list) -> dict:
 
 
 def format_linter_report(linter_report: dict) -> list:
-    return [
-        format_linter_error(e)
-        for errors in linter_report.values()
-        for e in errors
-    ]
+    result = []
+    for path, errors in linter_report.items():
+        # Ми беремо результат другої функції (словник)
+        # і дістаємо з нього список відформатованих помилок
+        formatted_file = format_single_linter_file(path, errors)
+        result.extend(formatted_file[path])
+    return result
