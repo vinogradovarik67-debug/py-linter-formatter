@@ -18,4 +18,3 @@ def format_linter_report(linter_report: dict) -> list[dict]:
         format_linter_error(error)
         for file_errors in linter_report.values()
         for error in file_errors
-    ]
